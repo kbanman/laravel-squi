@@ -1,0 +1,17 @@
+#!/bin/bash          
+
+echo Deleting existing pages
+#rm ./*.html
+
+URL="http://kellybanman.com/laravel/squi/docs"
+
+echo "Path to squi installation [$URL]:"
+read USER_URL
+
+if [ ! -z $USER_URL ]; then
+	URL=$USER_URL
+fi
+
+wget $URL -O index.html
+wget "$URL/table" -O table/index.html
+wget "$URL/form" -O form/index.html
