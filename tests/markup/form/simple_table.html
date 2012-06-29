@@ -1,0 +1,31 @@
+<form class="form" method="post" action="http://localhost/users/new">
+	<table class="form">
+		<tbody>
+			<tr>
+				<th><label for="name">Name</label></th>
+				<td><input type="text" name="name" id="name"></td>
+			</tr>
+			<tr>
+				<th><label for="email">Email</label></th>
+				<td><input type="text" name="email" id="email"></td>
+			</tr>
+			<tr>
+				<th><label for="password">Password</label></th>
+				<td><input type="password" name="password" id="password"></td>
+			</tr>
+			<tr>
+				<th><label for="password2">Confirm Password</label></th>
+				<td><input type="password" name="password2" id="password2"></td>
+			</tr>
+			<tr>
+				<th><label for="user_source">How did you hear about us?</label></th>
+				<td><select id="user_source" name="user_source"><option value="friend">From a friend</option><option value="google">Google search</option><option value="other">Other</option></select></td>
+			</tr>
+			<tr class="form-buttons">
+				<td colspan="2">
+					<button class="btn btn-primary">Submit</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>

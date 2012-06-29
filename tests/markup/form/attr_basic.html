@@ -1,0 +1,17 @@
+<form data-test="result!" method="get" action="http://localhost/users/new">
+	<label for="name">Name</label>
+	<input data-testing="results!" type="text" name="name" id="name">
+	<label for="email" class="required">Email</label>
+	<input data-testing="results!" class="required" required="required" type="text" name="email" value="example@example.com" id="email">
+	<label for="password">Password</label>
+	<input data-testing="results!" type="password" name="password" id="password">
+	<label for="password2">Confirm Password</label>
+	<input data-testing="results!" type="password" name="password2" id="password2">
+	<label for="user_source" style="font-weight:bold;">How did you hear about us?</label>
+	<select data-testing="results!" id="user_source" name="user_source"><option value="friend">From a friend</option><option value="google">Google search</option><option value="other">Other</option></select>
+	<label for="buttons">Buttons</label>
+	<input data-testing="results!" type="text" name="buttons" id="buttons">
+	<div class="form-actions">
+		<button class="btn btn-primary">Submit</button>
+	</div>
+</form>

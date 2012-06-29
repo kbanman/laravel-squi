@@ -1,0 +1,43 @@
+<form data-test="result!" method="get" action="http://localhost/users/new">
+	<fieldset>
+		<div class="control-group">
+			<label for="name" class="control-label">Name</label>
+			<div class="controls">
+				<input data-testing="results!" type="text" name="name" id="name">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="email" class="control-label required">Email</label>
+			<div class="controls">
+				<input data-testing="results!" class="required" required="required" type="text" name="email" value="example@example.com" id="email">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="password" class="control-label">Password</label>
+			<div class="controls">
+				<input data-testing="results!" type="password" name="password" id="password">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="password2" class="control-label">Confirm Password</label>
+			<div class="controls">
+				<input data-testing="results!" type="password" name="password2" id="password2">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="user_source" style="font-weight:bold;" class="control-label">How did you hear about us?</label>
+			<div class="controls">
+				<select data-testing="results!" id="user_source" name="user_source"><option value="friend">From a friend</option><option value="google">Google search</option><option value="other">Other</option></select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="buttons" class="control-label">Buttons</label>
+			<div class="controls">
+				<input data-testing="results!" type="text" name="buttons" id="buttons">
+			</div>
+		</div>
+		<div class="form-actions">
+				<button class="btn btn-primary">Submit</button>
+		</div>
+	</fieldset>
+</form>

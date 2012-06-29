@@ -1,0 +1,37 @@
+<form class="form" method="post" action="http://localhost/users/new">
+	<fieldset>
+		<div class="control-group">
+			<label for="name" class="control-label">Name</label>
+			<div class="controls">
+				<input type="text" name="name" id="name">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="email" class="control-label">Email</label>
+			<div class="controls">
+				<input type="text" name="email" id="email">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="password" class="control-label">Password</label>
+			<div class="controls">
+				<input type="password" name="password" id="password">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="password2" class="control-label">Confirm Password</label>
+			<div class="controls">
+				<input type="password" name="password2" id="password2">
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="user_source" class="control-label">How did you hear about us?</label>
+			<div class="controls">
+				<select id="user_source" name="user_source"><option value="friend">From a friend</option><option value="google">Google search</option><option value="other">Other</option></select>
+			</div>
+		</div>
+		<div class="form-actions">
+				<button class="btn btn-primary">Submit</button>
+		</div>
+	</fieldset>
+</form>
