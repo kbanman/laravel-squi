@@ -35,6 +35,9 @@ class Form extends HTML_Element {
 		'method' => 'post',
 	);
 
+	// Laravel\Messages or array containing errors
+	public $errors;
+
 	// Boolean flag for whether to render fields in a <fieldset />
 	public $fieldset;
 
@@ -169,6 +172,7 @@ class Form extends HTML_Element {
 
 	/**
 	 * Set the object or array from which to get field values
+	 * @return Form instance
 	 */
 	public function values($values)
 	{
@@ -179,12 +183,52 @@ class Form extends HTML_Element {
 
 	/**
 	 * Set the form buttons
+	 * @return Form instance
 	 */
 	public function buttons($buttons)
 	{
 		$this->buttons = $buttons;
 
 		return $this;
+	}
+
+	/**
+	 * Set errors
+	 * @return Form instance
+	 */
+	public function errors($errors)
+	{
+		$this->errors = $errors;
+
+		return $this;
+	}
+
+	/**
+	 * Get first error for a field
+	 * @return string|null
+	 */
+	public function error($field, $format = null)
+	{
+		if (is_a($field, 'Squi\\Form_Field'))
+		{
+			$field = $field->name;
+		}
+
+		if ( ! isset($this->errors))
+		{
+			return null;
+		}
+
+		if (is_a($this->errors, 'Laravel\\Messages') && $this->errors->has($field))
+		{
+			return $this->errors->first($field, $format);
+		}
+		elseif (is_array($this->errors) && isset($this->errors[$field]))
+		{
+			return $this->errors[$field];
+		}
+
+		return null;
 	}
 
 	/**

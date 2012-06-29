@@ -21,7 +21,7 @@ class TestTable extends PHPUnit_Framework_TestCase {
 		// Simple Table
 		$table = Squi\Table::make(array(
 			'name',
-			'birth_date' => 'Birthdate',
+			'Birthdate' => 'birth_date',
 		), $clients);
 
 		$expected = $this->markup('simple_horizontal');
@@ -31,8 +31,8 @@ class TestTable extends PHPUnit_Framework_TestCase {
 		// Simple Table
 		$table = Squi\Table::make(array(
 			'name',
-			'birth_date' => 'Birthdate',
-		), $clients)->with('layout', 'vertical');
+			'Birthdate' => 'birth_date',
+		), $clients)->layout('vertical');
 
 		$expected = $this->markup('simple_vertical');
 		$this->assertSame($expected, $table->render());

@@ -99,6 +99,16 @@ class Form_Field extends HTML_Element {
 	}
 
 	/**
+	 * Get the first error for this field
+	 * $format is used for Laravel\Messages errors
+	 * @return string|null
+	 */
+	public function error($format = null)
+	{
+		return $this->form->error($this);
+	}
+
+	/**
 	 * Set the value given an object or array
 	 * that might not even exist
 	 */

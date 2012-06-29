@@ -12,8 +12,8 @@ foreach ($fields as $field): ?>
 			<div class="controls">
 				<?php 
 				echo $field."\n";
-				if ( ! empty($field->error)): ?>
-				<span class="error"><?php echo $field->error; ?></span>
+				if ($error = $field->error()): ?>
+				<span class="error"><?php echo $error; ?></span>
 				<?php endif; ?>
 			</div>
 		</div>
