@@ -41,6 +41,10 @@ class Table extends HTML_Element {
 		{
 			call_user_func($callback, $this);
 		}
+		elseif (is_array($callback))
+		{
+			$this->columns($callback);
+		}
 
 		$rows && $this->rows($rows);
 	}
@@ -94,20 +98,33 @@ class Table extends HTML_Element {
 	 */
 	public function column($name, $callback = null)
 	{
-		if (is_null($callback))
+		$col = Table_Column::make($this);
+
+		// column(function($col){ })
+		if (is_callable($name) && is_null($callback))
 		{
-			$col = Table_Column::make($this, $name);
+			call_user_func($name, $col, $this);
 		}
-		else
+		// column('prop_name')
+		elseif (is_string($name) && is_null($callback))
 		{
 			$col = Table_Column::make($this)
-				->name($name)
-				->value($callback);
+				->name(ucwords(str_replace('_', ' ', $name)));
+		}
+		// column('Label', 'prop_name')
+		elseif (is_string($name) && is_string($callback))
+		{
+			$col->name($name)->value($callback);
+		}
+		// column('Label', function($row){ })
+		elseif (is_string($name) && is_callable($callback))
+		{
+			$col->name($name)->value($callback);
 		}
 		
 		$this->columns[] = $col;
 
-		return $this;
+		return $col;
 	}
 
 	/**
@@ -185,7 +202,30 @@ class Table extends HTML_Element {
 	 */
 	public function row_raw($values)
 	{
-		$this->rows[] = new Table_Row($values);
+		return $this->rows[] = new Table_Row($values);
+	}
+
+	/**
+	 * Set attributes for the rows
+	 * Can be either an assoc array,
+	 * a closure (function($row){}) returning an assoc array,
+	 * or an attribute and value string
+	 */
+	public function row_attr($attr, $value = null)
+	{
+		$this->row->attr($attr, $value);
+
+		return $this;
+	}
+
+	/**
+	 * Set the message to display when no rows exist
+	 */
+	public function empty_message($message)
+	{
+		$this->empty_message = $message;
+
+		return $this;
 	}
 
 	/**

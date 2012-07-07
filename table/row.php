@@ -29,6 +29,23 @@ class Table_Row extends HTML_Element {
 	}
 
 	/**
+	 * Add support for callable
+	 */
+	public function attr($key, $value = null)
+	{
+		if (is_callable($key))
+		{
+			$this->attr_callback = $key;
+			
+			return $this;
+		}
+		else
+		{
+			return parent::attr($key, $value);
+		}
+	}
+
+	/**
 	 * Set or get the row attributes
 	 * Differs from parent implementation by allowing the attributes
 	 * to be returned by a callback of signature function($row){}

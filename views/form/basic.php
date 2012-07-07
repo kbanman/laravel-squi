@@ -21,9 +21,8 @@ foreach ($fields as $field): ?>
 if ( ! empty($buttons)): ?>
 		<div class="form-actions">
 <?php foreach ($buttons as $button): ?>
-				<?php echo $button; ?>
+			<?php echo $button; ?>
 <?php endforeach; ?>
-
 		</div>
 <?php endif;
 if ($form->fieldset): ?>

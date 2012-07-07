@@ -193,6 +193,17 @@ class Form extends HTML_Element {
 	}
 
 	/**
+	 * Set the legend
+	 * @return Form instance
+	 */
+	public function legend($legend)
+	{
+		$this->legend = $legend;
+
+		return $this;
+	}
+
+	/**
 	 * Set errors
 	 * @return Form instance
 	 */
@@ -260,7 +271,7 @@ class Form extends HTML_Element {
 
 		if (is_object($model))
 		{
-			$this->values = $model;
+			$form->values = $model;
 			$model = get_class($model);
 		}
 

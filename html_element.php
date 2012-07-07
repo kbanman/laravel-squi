@@ -58,7 +58,10 @@ class HTML_Element {
 	{
 		if (is_array($attributes))
 		{
-			$this->attr += $attributes;
+			foreach ($attributes as $attr => $value)
+			{
+				$this->attr($attr, $value);
+			}
 
 			return $this;
 		}
@@ -74,7 +77,10 @@ class HTML_Element {
 		$attr = $this->attr;
 
 		// Convert the classes to string
-		isset($attr['class']) && $attr['class'] = implode(' ', $attr['class']);
+		if (isset($attr['class']) && is_array($attr['class']))
+		{
+			$attr['class'] = implode(' ', $attr['class']);
+		}
 
 		if (empty($attr['class'])) unset($attr['class']);
 

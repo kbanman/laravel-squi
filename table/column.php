@@ -13,21 +13,24 @@ class Table_Column extends HTML_Element {
 
 	public $attr_callback;
 
-	public function __construct(Table $table)
+	public $heading;
+
+	public function __construct(Table $table, $callback = null)
 	{
 		$this->table = $table;
+
+		if (is_callable($callback))
+		{
+			call_user_func($callback, $this, $table);
+		}
+
+		// Create the header object
+		$this->heading = new HTML_Element;
 	}
 
 	public static function make(Table $table, $callback = null)
 	{
-		$column = new static($table);
-
-		if (is_callable($callback))
-		{
-			call_user_func($callback, $column, $table);
-		}
-
-		return $column;
+		return new static($table, $callback);
 	}
 
 	/**
@@ -70,7 +73,7 @@ class Table_Column extends HTML_Element {
 			return call_user_func($this->value, $rowdata);
 		}
 
-		if (property_exists($rowdata, $this->value))
+		if (is_object($rowdata) && isset($rowdata->{$this->value}))
 		{
 			return $rowdata->{$this->value};
 		}
