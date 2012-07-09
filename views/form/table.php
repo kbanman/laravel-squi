@@ -8,7 +8,10 @@
 <?php foreach ($fields as $field): ?>
 			<tr>
 				<th><?php echo $field->label; ?></th>
-				<td><?php echo $field; ?></td>
+				<td><?php echo $field; 
+				if ($error = $field->error()): ?>
+				<span class="error"><?php echo $error; ?></span>
+				<?php endif; ?></td>
 			</tr>
 <?php endforeach; 
 if ( ! empty($buttons)): ?>

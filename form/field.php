@@ -150,10 +150,6 @@ class Form_Field extends HTML_Element {
 		{
 			if ( ! isset($$param))
 			{
-				if ($this->name == 'password')
-				{
-					die('wadss');
-				}
 				continue;
 			}
 
