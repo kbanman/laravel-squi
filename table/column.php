@@ -15,7 +15,7 @@ class Table_Column extends HTML_Element {
 
 	public $heading;
 
-	public function __construct(Table $table, $callback = null)
+	public function __construct(Table $table = null, $callback = null)
 	{
 		$this->table = $table;
 
@@ -28,7 +28,7 @@ class Table_Column extends HTML_Element {
 		$this->heading = new HTML_Element;
 	}
 
-	public static function make(Table $table, $callback = null)
+	public static function make(Table $table = null, $callback = null)
 	{
 		return new static($table, $callback);
 	}

@@ -63,6 +63,10 @@ class Form extends HTML_Element {
 		{
 			$field = $callback;
 		}
+		elseif (is_a($label, 'Squi\\Form_Field'))
+		{
+			$field = $label;
+		}
 		else
 		{
 			$field = Form_Field::make();

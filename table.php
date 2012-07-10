@@ -100,16 +100,25 @@ class Table extends HTML_Element {
 	{
 		$col = Table_Column::make($this);
 
+		// column(Table_Column)
+		if (is_a($name, 'Squi\\Table_Column'))
+		{
+			$col = $name;
+			$col->table = $this;
+		}
 		// column(function($col){ })
-		if (is_callable($name) && is_null($callback))
+		elseif (is_callable($name) && is_null($callback))
 		{
 			call_user_func($name, $col, $this);
 		}
 		// column('prop_name')
 		elseif (is_string($name) && is_null($callback))
 		{
-			$col = Table_Column::make($this)
-				->name(ucwords(str_replace('_', ' ', $name)));
+			// Shortcut that converts a single column descriptor
+			// into a label (captitalizing and converting underscores)
+			// and assuming that string is the row property/key from
+			// which to grab the column value.
+			$col->name(ucwords(str_replace('_', ' ', $name)));
 		}
 		// column('Label', 'prop_name')
 		elseif (is_string($name) && is_string($callback))
@@ -121,10 +130,8 @@ class Table extends HTML_Element {
 		{
 			$col->name($name)->value($callback);
 		}
-		
-		$this->columns[] = $col;
 
-		return $col;
+		return $this->columns[] = $col;
 	}
 
 	/**
@@ -134,43 +141,8 @@ class Table extends HTML_Element {
 	{
 		foreach ($columns as $key => $val)
 		{
-			$column = new Table_Column($this);
-
-			// If there is only a value
-			if (is_int($key))
-			{
-				// Shortcut that converts a single column descriptor
-				// into a label (captitalizing and converting underscores)
-				// and assuming that string is the row property/key from
-				// which to grab the column value.
-				if (is_string($val))
-				{
-					$column->name = ucwords(str_replace('_', ' ', $val));
-					$column->value = $val;
-				}
-				// Parameters are specified as an array
-				else
-				{
-					$column->parse_config($val);
-				}
-			}
-			// The key is the column name,
-			// the value is the row value callback or property name
-			else
-			{
-				$column->name = $key;
-
-				if (is_array($val))
-				{
-					$column->parse_config($val);
-				}
-				else
-				{
-					$column->value = $val;
-				}
-			}
-
-			$this->columns[] = $column;
+			$args = is_int($key) ? array($val) : array($key, $val);
+			call_user_func_array(array($this, 'column'), $args);
 		}
 
 		return $this;
