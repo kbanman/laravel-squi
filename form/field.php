@@ -125,7 +125,7 @@ class Form_Field extends HTML_Element {
 			return;
 		}
 
-		if (is_object($values) && isset($values->{$this->name()}))
+		if (is_object($values) && $values->{$this->name()})
 		{
 			return $this->value($values->{$this->name()});
 		}
