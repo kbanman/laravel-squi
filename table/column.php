@@ -73,17 +73,20 @@ class Table_Column extends HTML_Element {
 			return call_user_func($this->value, $rowdata);
 		}
 
-		if (is_object($rowdata) && isset($rowdata->{$this->value}))
+		if (is_string($this->value) && substr($this->value, 0, 1) == '=')
 		{
-			return $rowdata->{$this->value};
+			return $this->value;
+		}
+
+		if (is_object($rowdata) && $value = @$rowdata->{$this->value})
+		{
+			return $value;
 		}
 
 		if (array_key_exists($this->value, $rowdata))
 		{
 			return $rowdata[$this->value];
 		}
-
-		return $this->value;
 	}
 
 	/**
