@@ -21,6 +21,12 @@ class Table extends HTML_Element {
 	// Instance of Table_Rowdata to contain column names
 	public $header_data;
 
+	// Footer row (instance of Table_Row)
+	public $footer;
+
+	// Footer data (instance of Table_Rowdata)
+	public $footer_data;
+
 	// Message to show when there are no rows
 	public $empty_message = 'No records to show';
 
@@ -174,7 +180,9 @@ class Table extends HTML_Element {
 	 */
 	public function row_raw($values)
 	{
-		return $this->rows[] = new Table_Row($values);
+		$this->rows[] = new Table_Rowdata($values);
+
+		return $this;
 	}
 
 	/**

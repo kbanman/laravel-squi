@@ -6,7 +6,7 @@
 class Table_Rowdata extends HTML_Element {
 	
 	// Values and attributes for the row
-	public $values = array();
+	public $columns = array();
 
 	public function __construct($values = null)
 	{
@@ -25,7 +25,14 @@ class Table_Rowdata extends HTML_Element {
 	 */
 	public function set_value(Table_Column $column, $value)
 	{
-		$this->values[$this->column_index($column)] = $value;
+		$index = $this->column_index($column);
+
+		if ( ! isset($this->columns[$index]))
+		{
+			$this->columns[$index] = new Table_Column;
+		}
+
+		$this->columns[$index]->value($value);
 	}
 
 	/**
@@ -36,7 +43,7 @@ class Table_Rowdata extends HTML_Element {
 		// Find out where the column stands in the table
 		$index = $this->column_index($column);
 
-		return isset($this->values[$index]) ? $this->values[$index] : null;
+		return isset($this->columns[$index]) ? $this->columns[$index]->value : null;
 	}
 
 	/**
@@ -49,15 +56,21 @@ class Table_Rowdata extends HTML_Element {
 	{
 		foreach ($values as $key => $val)
 		{
-			$col = new HTML_Element;
+			$col = new Table_Column;
 
 			$attr = is_array($val) ? $val : array();
 
 			if (is_int($key) && is_array($val))
 			{
-				$col->value = isset($val['value']) ? $val['value'] : '';
-				isset($val['attr']) ? $val['value'] : '';
+				$col->value( isset($val['value']) ? $val['value'] : '' );
+				$col->attr(isset($val['attr']) ? $val['attr'] : array());
 			}
+			else
+			{
+				$col->value($val);
+			}
+
+			$this->columns[] = $col;
 		}
 	}
 
