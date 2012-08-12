@@ -247,6 +247,10 @@ class Form_Field extends HTML_Element {
 
 			return implode("\n", $fields);
 		}
+		elseif ($this->type == 'file')
+		{
+			return \Form::file($this->name, $this->attributes_array());
+		}
 
 		return call_user_func('\\Form::'.$this->type, $this->name, $this->value, $this->attributes_array());
 	}
