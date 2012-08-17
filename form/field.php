@@ -54,7 +54,7 @@ class Form_Field extends HTML_Element {
 	 * Set the Label for this field
 	 * Can either be a string or a Form_Label instance
 	 */
-	public function label($label)
+	public function label($label, $humanize = false)
 	{
 		if (is_a($label, 'Squi\\Form_Label'))
 		{
@@ -62,6 +62,11 @@ class Form_Field extends HTML_Element {
 		}
 		else
 		{
+			if ($humanize)
+			{
+				$label = ucwords(str_replace('_', ' ', $label));
+			}
+
 			$this->label = Form_Label::make($label);
 		}
 

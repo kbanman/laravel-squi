@@ -1,5 +1,6 @@
 <form<?php echo $form->attributes(); ?>>
-<?php echo $form->before; ?>
+<?php echo $form->before; 
+foreach ($hidden as $field) { echo $field; } ?>
 <?php if ($form->legend !== false): ?>
 	<legend><?php echo $form->legend; ?></legend>
 <?php endif; ?>
