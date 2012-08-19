@@ -213,6 +213,24 @@ class Form_Field extends HTML_Element {
 	}
 
 	/**
+	 * Remove the field from the form
+	 */
+	public function remove()
+	{
+		// For some reason array_search caused a recursivity problem
+		foreach ($this->form->fields as $key => $field)
+		{
+			if ($field === $this)
+			{
+				unset($this->form->fields[$key]);
+				break;
+			}
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Get the field as HTML string
 	 */
 	public function html()
