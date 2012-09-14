@@ -21,7 +21,7 @@
 	</tbody>
 <?php if ($table->footer): ?>
 	<tfoot>
-		<tr<?php echo $table->footer->get_attributes($table->header_data); ?>>
+		<tr<?php echo $table->footer->get_attributes($table->footer_data); ?>>
 <?php foreach ($table->columns as $col): ?>
 			<td<?php echo $table->footer->get_attributes($col); ?>><?php echo $col->get_value($table->footer_data); ?></td>
 <?php endforeach; ?>
