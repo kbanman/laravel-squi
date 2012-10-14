@@ -73,16 +73,25 @@ class Table_Column extends HTML_Element {
 			return call_user_func($this->value, $rowdata);
 		}
 
+		// Literal string value ('=The Value')
 		if (is_string($this->value) && substr($this->value, 0, 1) == '=')
 		{
 			return $this->value;
 		}
 
+		// Regular objects (DB::query() results)
+		if (is_object($rowdata) && property_exists($rowdata, $this->value))
+		{
+			return $rowdata->{$this->value};
+		}
+
+		// Eloquent objects
 		if (is_object($rowdata) && $value = @$rowdata->{$this->value})
 		{
 			return $value;
 		}
 
+		// Arrays
 		if (array_key_exists($this->value, $rowdata))
 		{
 			return $rowdata[$this->value];

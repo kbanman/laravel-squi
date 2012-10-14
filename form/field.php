@@ -54,7 +54,7 @@ class Form_Field extends HTML_Element {
 	 * Set the Label for this field
 	 * Can either be a string or a Form_Label instance
 	 */
-	public function label($label)
+	public function label($label, $humanize = false)
 	{
 		if (is_a($label, 'Squi\\Form_Label'))
 		{
@@ -62,6 +62,11 @@ class Form_Field extends HTML_Element {
 		}
 		else
 		{
+			if ($humanize)
+			{
+				$label = ucwords(str_replace('_', ' ', $label));
+			}
+
 			$this->label = Form_Label::make($label);
 		}
 
@@ -205,6 +210,24 @@ class Form_Field extends HTML_Element {
 	public function is_hidden()
 	{
 		return $this->attr('type') == 'hidden';
+	}
+
+	/**
+	 * Remove the field from the form
+	 */
+	public function remove()
+	{
+		// For some reason array_search caused a recursivity problem
+		foreach ($this->form->fields as $key => $field)
+		{
+			if ($field === $this)
+			{
+				unset($this->form->fields[$key]);
+				break;
+			}
+		}
+
+		return $this;
 	}
 
 	/**

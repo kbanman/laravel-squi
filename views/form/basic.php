@@ -1,5 +1,6 @@
 <form<?php echo $form->attributes(); ?>>
 <?php echo $form->before;
+foreach ($hidden as $field) { echo $field; }
 if ($form->fieldset): ?>
 	<fieldset>
 <?php endif; ?>

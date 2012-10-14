@@ -79,7 +79,7 @@ class Form extends HTML_Element {
 			$field->name = $label;
 
 			// Automagic label by capitalization
-			$field->label(ucwords(str_replace('_', ' ', $label)));
+			$field->label($label, $humanize = true);
 		}
 
 		// field(function($field){})
