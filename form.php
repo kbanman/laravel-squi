@@ -285,6 +285,23 @@ class Form extends HTML_Element {
 	}
 
 	/**
+	 * Assign values to each field
+	 * Values are taken either from the passed variable
+	 * or the values assigned via ->values()
+	 */
+	public function assign_values($values = null)
+	{
+		is_null($values) || $this->values($values);
+
+		foreach ($this->fields as $field)
+		{
+			// Add value from the model instance
+			$field->extract_value($this->values);
+		}
+	}
+
+
+	/**
 	 * Render the form as HTML
 	 */
 	public function render()
@@ -299,11 +316,11 @@ class Form extends HTML_Element {
 		// Are we using a twitter bootstrap layout?
 		$bootstrap = strrpos($this->layout->view, 'bootstrap') !== false;
 
+		// This is an extra iteration of the fields, but oh well
+		$this->assign_values();
+
 		foreach ($this->fields as $field)
 		{
-			// Add value from the model instance
-			$field->extract_value($this->values);
-
 			// Add bootstrap classes if appropriate
 			if ($bootstrap && $field->label)
 			{

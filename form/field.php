@@ -122,7 +122,7 @@ class Form_Field extends HTML_Element {
 				$field->extract_value($values);
 			}
 
-			return;
+			return $this;
 		}
 
 		if (is_object($values) && $values->{$this->name()})
