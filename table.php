@@ -124,7 +124,7 @@ class Table extends HTML_Element {
 			// into a label (captitalizing and converting underscores)
 			// and assuming that string is the row property/key from
 			// which to grab the column value.
-			$col->name(ucwords(str_replace('_', ' ', $name)));
+			$col->name(ucwords(str_replace('_', ' ', $name)))->value($name);
 		}
 		// column('Label', 'prop_name')
 		elseif (is_string($name) && is_string($callback))
