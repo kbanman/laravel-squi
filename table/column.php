@@ -86,7 +86,7 @@ class Table_Column extends HTML_Element {
 		}
 
 		// Eloquent objects
-		if (is_a($rowdata, 'Eloquent') && $value = $rowdata->value($this->value))
+		if (is_a($rowdata, 'Modest') && $value = $rowdata->_value($this->value))
 		{
 			return $value;
 		}
