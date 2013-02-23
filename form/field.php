@@ -20,6 +20,13 @@ class Form_Field extends HTML_Element {
 	// Selected value for select fields
 	public $selected;
 
+	/**
+	 * Field html generator (optional)
+	 * Should return string html representing the field
+	 * @var Closure ($field)
+	 */
+	public $generator;
+
 	// Attributes accessible as chainable methods
 	public static $chainable_attr = array(
 		'label', 'name', 'attr', 'attributes', 'type', 'value', 'options',
@@ -235,6 +242,13 @@ class Form_Field extends HTML_Element {
 	 */
 	public function html()
 	{
+		// User-specified callback
+		if (isset($this->generator))
+		{
+			$fn = $this->generator;
+			return $fn($this);
+		}
+
 		// Multi-field
 		if ( ! empty($this->fields))
 		{
