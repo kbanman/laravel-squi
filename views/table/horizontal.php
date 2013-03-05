@@ -7,10 +7,10 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($table->rows as $row): ?>
-		<tr<?php echo $table->row->get_attributes($row); ?>>
+<?php foreach ($table->rows as $i => $row): ?>
+		<tr<?php echo $table->row->get_attributes($row, $i); ?>>
 <?php foreach ($table->columns as $col): ?>
-			<td<?php echo $col->get_attributes($row); ?>><?php echo $col->get_value($row); ?></td>
+			<td<?php echo $col->get_attributes($row, $i); ?>><?php echo $col->get_value($row, $i); ?></td>
 <?php endforeach; ?>
 		</tr>
 <?php endforeach; if ( ! count($table->rows) and $table->empty_message): ?>

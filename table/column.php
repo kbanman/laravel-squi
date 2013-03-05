@@ -61,7 +61,7 @@ class Table_Column extends HTML_Element {
 	/**
 	 * Return the cell value for a given row
 	 */
-	public function get_value($rowdata)
+	public function get_value($rowdata, $i=null)
 	{
 		if (is_a($rowdata, 'Squi\\Table_Rowdata'))
 		{
@@ -70,13 +70,13 @@ class Table_Column extends HTML_Element {
 
 		if (is_callable($this->value))
 		{
-			return call_user_func($this->value, $rowdata);
+			return call_user_func($this->value, $rowdata, $i);
 		}
 
 		// Literal string value ('=The Value')
 		if (is_string($this->value) && substr($this->value, 0, 1) == '=')
 		{
-			return $this->value;
+			return substr($this->value, 1);
 		}
 
 		// Regular objects (DB::query() results)
