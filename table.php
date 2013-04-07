@@ -226,6 +226,12 @@ class Table extends HTML_Element {
 			$this->layout($this->layout);
 		}
 
+		// Generate the footer
+		if ($this->footer && ! is_a($this->footer, 'View'))
+		{
+			$this->footer = \View::make('squi::table.footer', ['table' => $this]);
+		}
+
 		// Add reference to the table
 		$this->layout->with('table', $this);
 
@@ -237,6 +243,9 @@ class Table extends HTML_Element {
 
 		// Header row
 		$this->layout->with('header', $this->header);
+
+		// Footer
+		$this->layout->with('footer', $this->footer);
 
 		// Render that mofo
 		return $this->layout->render();

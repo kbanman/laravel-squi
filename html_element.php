@@ -51,6 +51,18 @@ class HTML_Element {
 	}
 
 	/**
+	 * Remove an attribute from the element
+	 */
+	public function removeAttr($attr)
+	{
+		if (isset($this->attr[$attr])) {
+			unset($this->attr[$attr]);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Get or set an array of attributes
 	 * The returned attributes are in HTML string format
 	 */

@@ -106,6 +106,19 @@ class Form_Field extends HTML_Element {
 
 			return $this;
 		}
+
+		// Special case for checkboxes
+		if ($this->type == 'checkbox')
+		{
+			if ($value)
+			{
+				$this->attr('checked', 'checked');
+			}
+			else
+			{
+				$this->removeAttr('checked');
+			}
+		}
 		
 		return $this->attr('value', $value);
 	}
@@ -137,11 +150,12 @@ class Form_Field extends HTML_Element {
 			return $this;
 		}
 
-		if (is_object($values) && $values->{$this->name()})
+		//dd($values->{$this->name()});
+		if (is_object($values) && $values->{$this->name()} !== null)
 		{
 			return $this->value($values->{$this->name()});
 		}
-		elseif (is_array($values) && isset($values[$this->name()]))
+		elseif (is_array($values) && array_key_exists($this->name(), $values))
 		{
 			return $this->value($values[$this->name()]);
 		}
